@@ -2,6 +2,8 @@
 #include "string.h"
 #include "queue.h"
  
+ #include <stdlib.h>
+
 void FAIL() {   exit(1);    }
 void OK(const char* m) { /** print m */ }
 void t_true(bool p) { if (!p) FAIL(); }
