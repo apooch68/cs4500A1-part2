@@ -1,7 +1,9 @@
 #pragma once
 
+#include "object.h"
+
 //what about polymorphism, accept object as oppsoed to void ptr, but potentially slices away child aspects
-class Queue
+class Queue: public Object
 {
 public:
     //constructs an empty q
