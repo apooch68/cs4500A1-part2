@@ -2,7 +2,10 @@
 
 #include "object.h"
 
-//what about polymorphism, accept object as oppsoed to void ptr, but potentially slices away child aspects
+/**
+ * @brief Class that represents a queue
+ * 
+ */
 class Queue: public Object
 {
 public:

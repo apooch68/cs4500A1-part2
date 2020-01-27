@@ -1,4 +1,3 @@
-#include "helper.h"  // Your file, with any C++ code that you need
 #include "object.h"  // Your file with the CwC declaration of Object
 #include "string.h"
 #include "queue.h"
