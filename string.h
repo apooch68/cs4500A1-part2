@@ -1,79 +1,49 @@
+//lang::CwC
 #pragma once
 
 #include "object.h"
-#include <string.h>
-#include <assert.h>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio> 
 
 /**
- * @brief Class for representing a String.
- * 
- */
-class String: public Object {
-    public:
-    
-        String(const char* s);
+ * An immutable String class representing a char*
+ * author: chasebish */
+class String : public Object {
+public:
+  /** CONSTRUCTORS & DESTRUCTORS **/
 
-        virtual ~String();
+  /* Creates a String copying s */
+  String(const char* s);
 
-        /**
-         * @brief Returns the length of the string.
-         * 
-         * @return int The length of hte string.
-         */
-        uint getLength();
+  /* Copies a String copying the value from s */
+  String(String* const s);
 
-        /**
-         * @brief Returns whether or not the given object is equal to this string.
-         * Equality between strings means that all characters within both
-         * strings are the exact same.
-         * 
-         * @param o The given object ot check equaliity.
-         * @return true If both this and the given object are the same.
-         * @return false otherwise.
-         */
-        virtual bool equals(Object* o);
+  /* Clears String from memory */
+  ~String();
 
-        /**
-         * @brief Compares this String with the given string with respect
-         * to the strings contents (i.e in alphabetical order). If the given
-         * string is larger than this one, a negative int is returned. If the 
-         * given string is smaller (alphabetically), a positive int is returned. 
-         * If the two strings are equal, 0 is returned.
-         * 
-         * 
-         * @param s The string to compare to.
-         * @return int Positive if this string is larger, negative if this string
-         * is smaller, 0 otherwise.
-         */
-        virtual int compareTo(String* s);
 
-        /**
-         * @brief Returns the character at the specified index. Index
-         * must be within the length of the string and 0.
-         * 
-         * @param i The index to be queried.
-         * @return char The char at the given index.
-         */
-        char charAt(uint i);
+  /** INHERITED METHODS **/
 
-        /**
-         * @brief Concacts the given string object with this string object.
-         * 
-         * @param e The given String.
-         */
-        String* concat(String* e);
+  /* Inherited from Object, generates a hash for a String */
+  size_t hash();
 
-        /**
-         * @brief Get the string.
-         * 
-         * @return const char* The string.
-         */
-        const char* getString();
+  /* Inherited from Object, checks equality between an String and an Object */
+  bool equals(Object* const obj);
 
-        /**
-         * @brief Returns the hash of the given string
-         * 
-         * @return size_t The hash
-         */
-        size_t hash_me();
+
+  /** STRING METHODS **/
+  
+  /** Compares strings based on alphabetical order
+   * < 0 -> this String is less than String s
+   * = 0 -> this String is equal to String s
+   * > 0 -> this String is greater than String s
+   */
+  int cmp(String* const s);
+
+  /* Creates a new String by combining two existing Strings */
+  String* concat(String* const s);
+
+  /* Returns the current length of the String */
+  size_t size();
 };
