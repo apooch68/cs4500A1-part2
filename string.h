@@ -69,4 +69,11 @@ class String: public Object {
          * @return const char* The string.
          */
         const char* getString();
+
+        /**
+         * @brief Returns the hash of the given string
+         * 
+         * @return size_t The hash
+         */
+        size_t hash_me();
 };
