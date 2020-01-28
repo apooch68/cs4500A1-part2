@@ -1,59 +1,69 @@
+ 
+#include <stdlib.h>
+#include <gtest/gtest.h>
+
 #include "object.h"  // Your file with the CwC declaration of Object
 #include "string.h"
 #include "queue.h"
- 
- #include <stdlib.h>
 
-void FAIL() {   exit(1);    }
-void OK(const char* m) { /** print m */ }
-void t_true(bool p) { if (!p) FAIL(); }
-void t_false(bool p) { if (p) FAIL(); }
- 
+// Taken from sample test
+#define CS4500_ASSERT_TRUE(a)  \
+  ASSERT_EQ((a),true);
+#define CS4500_ASSERT_EXIT_ZERO(a)  \
+  ASSERT_EXIT(a(), ::testing::ExitedWithCode(0), ".*");
+
 void test1() {
   String * s = new String("Hello");
   String * t = new String("World");
   Object * o = new Object();
   Object * o2 = new Object();
-  Queue  * qq = new Queue;
-  t_true(qq->remove()  == nullptr);
-  t_true(qq->peek()  == nullptr);
-  t_true(qq->size() == 0);
+  Queue  * qq = new Queue();
+  CS4500_ASSERT_TRUE(qq->remove()  == nullptr);
+  CS4500_ASSERT_TRUE(qq->peek()  == nullptr);
+  CS4500_ASSERT_TRUE(qq->size() == 0);
   qq->add(s);
-  t_true(qq->peek()  ==  s);
-  t_true(qq->size()  == 1);
-  t_true(qq->remove()  == s);
-  t_true(qq->size()  == 0);
+  CS4500_ASSERT_TRUE(qq->peek()  ==  s);
+  CS4500_ASSERT_TRUE(qq->size()  == 1);
+  CS4500_ASSERT_TRUE(qq->remove()  == s);
+  CS4500_ASSERT_TRUE(qq->size()  == 0);
 
-  OK("1");
+  exit(0);
 }
- 
+
+TEST(W1, test1) {
+  CS4500_ASSERT_EXIT_ZERO(test1)
+}
+
 void test2() {
 
   String * s = new String("Hello");
   String * t = new String("World");
   Object * o = new Object();
   Object * o2 = new Object();
-  Queue  * qq = new Queue;
+  Queue  * qq = new Queue();
   qq->add(s);
   qq->add(o);
   qq->add(t);
   qq->add(s);
-  t_true(qq->peek()  ==  s);
-  t_true(qq->size()  == 4);
-  t_true(qq->remove()  == s);
-  t_true(qq->peek()  ==  o);
-  t_true(qq->size()  == 3);
-  t_true(qq->remove()  == o);
-  t_true(qq->peek()  ==  t);
-  t_true(qq->size()  == 2);
-  t_true(qq->remove()  == t);
-  t_true(qq->peek()  ==  s);
-  t_true(qq->size()  == 1);
-  OK("2");
+  CS4500_ASSERT_TRUE(qq->peek()  ==  s);
+  CS4500_ASSERT_TRUE(qq->size()  == 4);
+  CS4500_ASSERT_TRUE(qq->remove()  == s);
+  CS4500_ASSERT_TRUE(qq->peek()  ==  o);
+  CS4500_ASSERT_TRUE(qq->size()  == 3);
+  CS4500_ASSERT_TRUE(qq->remove()  == o);
+  CS4500_ASSERT_TRUE(qq->peek()  ==  t);
+  CS4500_ASSERT_TRUE(qq->size()  == 2);
+  CS4500_ASSERT_TRUE(qq->remove()  == t);
+  CS4500_ASSERT_TRUE(qq->peek()  ==  s);
+  CS4500_ASSERT_TRUE(qq->size()  == 1);
+  exit(0);
 }
- 
 
-int main() {
-  test1();
-  return 0;
+TEST(W1, test2) {
+  CS4500_ASSERT_EXIT_ZERO(test2)
+}
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
