@@ -12,7 +12,7 @@
 #define CS4500_ASSERT_EXIT_ZERO(a)  \
   ASSERT_EXIT(a(), ::testing::ExitedWithCode(0), ".*");
 
-void test1() {
+TEST(W1, test1) {
   String * s = new String("Hello");
   String * t = new String("World");
   Object * o = new Object();
@@ -26,16 +26,9 @@ void test1() {
   CS4500_ASSERT_TRUE(qq->size()  == 1);
   CS4500_ASSERT_TRUE(qq->remove()  == s);
   CS4500_ASSERT_TRUE(qq->size()  == 0);
-
-  exit(0);
 }
 
-TEST(W1, test1) {
-  CS4500_ASSERT_EXIT_ZERO(test1)
-}
-
-void test2() {
-
+TEST(W1, test2) {
   String * s = new String("Hello");
   String * t = new String("World");
   Object * o = new Object();
@@ -56,11 +49,6 @@ void test2() {
   CS4500_ASSERT_TRUE(qq->remove()  == t);
   CS4500_ASSERT_TRUE(qq->peek()  ==  s);
   CS4500_ASSERT_TRUE(qq->size()  == 1);
-  exit(0);
-}
-
-TEST(W1, test2) {
-  CS4500_ASSERT_EXIT_ZERO(test2)
 }
 
 int main(int argc, char **argv) {
